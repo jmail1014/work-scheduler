@@ -16,7 +16,6 @@
       $(this).children('textarea').addClass('present');
     } else if (id > currentTime) {
       $(this).children('textarea').addClass('future');
-      console.log("hi");
     } else if (id < currentTime) {
       $(this).children('textarea').addClass('past');
     }
@@ -28,10 +27,11 @@
     var textArea = $(this).siblings("textarea").val();
     var hourEl = $(this).parent().attr("id");
 
-    localStorage.setItem(hourEl, textArea)
+    localStorage.setItem(hourEl, textArea);
+    return localStorage.getItem(hourEl);
   };
 
-  // shorthand jquery method for event delegation
- // $(".description").on("click","textarea", function() {
-    // store user input on local storage
- // });
+
+  // $(".description").on("click","textarea", function() {
+  
+  // });
