@@ -1,27 +1,37 @@
   // current time
   var currentTime = moment().format('H');
   console.log(currentTime);
-
   // current date display
   var currentDate = moment().format("dddd, MMM Do YYYY");
-  $("#currentDay").html(currentDate);
-  console.log(currentDate);
+  
+  $("#currentDay").text(currentDate);
+ 
+  $( ".time-block" ).each(function() {
 
-  $(this.#currentDay).html(currentDate);
+    var id = $( this ).attr("id");
+    console.log(id, currentTime);
+
+    // color code textarea to represent past, present or future
+    if (currentTime === id) {
+      $(this).children('textarea').addClass('present');
+    } else if (id > currentTime) {
+      $(this).children('textarea').addClass('future');
+      console.log("hi");
+    } else if (id < currentTime) {
+      $(this).children('textarea').addClass('past');
+    }
+  });
 
   $(".saveBtn").click(saveClick);
 
-  $(".description").on("click","textarea", function() {
-    e.preventDefault();
+  function saveClick() {
+    var textArea = $(this).siblings("textarea").val();
+    var hourEl = $(this).parent().attr("id");
 
-    $("#hour9 .description").val(localStorage.getItem("hour9"));
-    $("#hour10 .description").val(localStorage.getItem("hour10"));
-    $("#hour11 .description").val(localStorage.getItem("hour11"));
-    $("#hour12 .description").val(localStorage.getItem("hour12"));
-    $("#hour1 .description").val(localStorage.getItem("hour1"));
-    $("#hour2 .description").val(localStorage.getItem("hour2"));
-    $("#hour3 .description").val(localStorage.getItem("hour3"));
-    $("#hour4 .description").val(localStorage.getItem("hour4"));
-    $("#hour5 .description").val(localStorage.getItem("hour5"));
+    localStorage.setItem(hourEl, textArea)
+  };
 
-  });
+  // shorthand jquery method for event delegation
+ // $(".description").on("click","textarea", function() {
+    // store user input on local storage
+ // });
